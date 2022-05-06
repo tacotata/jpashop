@@ -1,9 +1,8 @@
 package jpabook.jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -14,13 +13,12 @@ public class Member {
     private String name;
     private String street;
     private String zipcode;
-//
-//    public Member() {
-//
-//    }
-    // getter setter는 다 만들필요가 없긴한데 getter는 가급적만들고
-    //setter는 좀 그래 가급적 생성자에서 다 세팅하고 setter 사용 최소화해야함
-    //유지보수 위해서 어디서든 set하면 찾기 힘들어
+
+    //연관관게 주인은member
+    //이건 그냥 예시라서 이렇게함 잘못된 코드임
+    @OneToMany(mappedBy ="member")
+    private List<Order> orders = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
