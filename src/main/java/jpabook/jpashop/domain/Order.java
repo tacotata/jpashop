@@ -13,16 +13,17 @@ public class Order extends BaseEntity{
     @Column(name ="ORDER_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="MEMBER_ID")
     private Member member;
 
-    @OneToOne
+    //order랑 delivery 라이프 사이클을 맞춰
+    //order 저장하면 자동으로 Delivery 저장
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
-
-    @OneToMany(mappedBy="order")
+    @OneToMany(mappedBy="order" , cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
 
